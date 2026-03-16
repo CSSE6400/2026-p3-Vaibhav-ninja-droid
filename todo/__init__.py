@@ -18,6 +18,14 @@ def create_app(config_overrides=None):
    with app.app_context(): 
       db.create_all() 
       db.session.commit() 
+
+   @app.route("/")
+   def home():
+      return {
+         "message": "Todo API is running",
+         "health": "/api/v1/health",
+         "todos": "/api/v1/todos"
+      }
  
    # Register the blueprints 
    from todo.views.routes import api 
